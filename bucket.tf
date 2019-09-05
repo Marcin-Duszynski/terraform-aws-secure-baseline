@@ -91,6 +91,7 @@ data "aws_iam_policy_document" "audit_log" {
       ["${module.audit_log_bucket.this_bucket.arn}/cloudtrail/AWSLogs/${var.aws_account_id}/*"],
       local.is_master_account ? ["${module.audit_log_bucket.this_bucket.arn}/cloudtrail/AWSLogs/${data.aws_organizations_organization.org.id}/*"] : []
     )
+    
     condition {
       test     = "StringEquals"
       variable = "s3:x-amz-acl"

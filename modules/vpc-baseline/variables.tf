@@ -16,3 +16,8 @@ variable "tags" {
     "Terraform" = true
   }
 }
+
+variable "enabled" {
+  description = "A boolean that indicates this module is enabled. Resources are not created if it is set to false."
+  default     = true
+}
