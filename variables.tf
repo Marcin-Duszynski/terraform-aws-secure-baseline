@@ -283,3 +283,9 @@ variable "guardduty_invitation_message" {
   description = "Message for invitation."
   default     = "This is an automatic invitation message from guardduty-baseline module."
 }
+
+variable "switchrole_url" {
+  type        = "string"
+  description = "URL to the IAM console to switch to a role"
+  default     = "https://signin.aws.amazon.com/switchrole?account=%s&roleName=%s&displayName=%s"
+}

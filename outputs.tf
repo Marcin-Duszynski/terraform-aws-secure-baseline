@@ -263,3 +263,17 @@ output "default_route_table" {
   }
 }
 
+output "switchrole_master_url" {
+  description = "URL to the IAM console to switch to the master role"
+  value       = "${format(var.switchrole_url, data.aws_caller_identity.current.account_id, module.iam_baseline.master_iam_role.name, module.iam_baseline.master_iam_role.name)}"
+}
+
+output "switchrole_manager_url" {
+  description = "URL to the IAM console to switch to the manager role"
+  value       = "${format(var.switchrole_url, data.aws_caller_identity.current.account_id, module.iam_baseline.manager_iam_role.name, module.iam_baseline.manager_iam_role.name)}"
+}
+
+output "switchrole_support_url" {
+  description = "URL to the IAM console to switch to the support role"
+  value       = "${format(var.switchrole_url, data.aws_caller_identity.current.account_id, module.iam_baseline.support_iam_role.name, module.iam_baseline.support_iam_role.name)}"
+}
