@@ -91,8 +91,19 @@ variable "support_iam_role_policy_name" {
   default     = "IAM-Support-Role"
 }
 
-variable "support_iam_role_principal_arn" {
-  description = "The ARN of the IAM principal element by which the support role could be assumed."
+variable "support_iam_role_principals" {
+  description = "The ARNs of the IAM principal elements by which the support role could be assumed."
+  type = list
+}
+
+variable "manager_iam_role_principals" {
+  description = "The ARNs of the IAM principal elements by which the manager role could be assumed."
+  type = list
+}
+
+variable "master_iam_role_principals" {
+  description = "The ARNs of the IAM principal elements by which the master role could be assumed."
+  type = list
 }
 
 variable "max_password_age" {

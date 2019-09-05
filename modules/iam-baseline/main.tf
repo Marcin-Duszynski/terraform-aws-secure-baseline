@@ -20,7 +20,7 @@ data "aws_iam_policy_document" "master_assume_policy" {
   statement {
     principals {
       type        = "AWS"
-      identifiers = ["arn:aws:iam::${var.aws_account_id}:root"]
+      identifiers = var.master_iam_role_principals
     }
     actions = ["sts:AssumeRole"]
   }
@@ -36,8 +36,8 @@ resource "aws_iam_role" "master" {
 data "aws_iam_policy_document" "master_policy" {
   statement {
     actions = [
-      "iam:CreateGroup", "iam:CreatePolicy", "iam:CreatePolicyVersion", "iam:CreateRole", "iam:CreateUser",
-      "iam:DeleteGroup", "iam:DeletePolicy", "iam:DeletePolicyVersion", "iam:DeleteRole", "iam:DeleteRolePolicy", "iam:DeleteUser",
+      "iam:CreateGroup", "iam:CreatePolicy", "iam:CreatePolicyVersion", "iam:CreateRole",
+      "iam:DeleteGroup", "iam:DeletePolicy", "iam:DeletePolicyVersion", "iam:DeleteRole", "iam:DeleteRolePolicy",
       "iam:PutRolePolicy",
       "iam:GetPolicy", "iam:GetPolicyVersion", "iam:GetRole", "iam:GetRolePolicy", "iam:GetUser", "iam:GetUserPolicy",
       "iam:ListEntitiesForPolicy", "iam:ListGroupPolicies", "iam:ListGroups", "iam:ListGroupsForUser",
@@ -57,6 +57,7 @@ data "aws_iam_policy_document" "master_policy" {
     effect = "Deny"
     actions = [
       "iam:AddUserToGroup",
+      "iam:CreateUser", "iam:DeleteUser",
       "iam:AttachGroupPolicy",
       "iam:DeleteGroupPolicy", "iam:DeleteUserPolicy",
       "iam:DetachGroupPolicy", "iam:DetachRolePolicy", "iam:DetachUserPolicy",
@@ -75,11 +76,17 @@ resource "aws_iam_role_policy" "master_policy" {
   policy = data.aws_iam_policy_document.master_policy.json
 }
 
+
+resource "aws_iam_role_policy_attachment" "master_readonly_policy" {
+  role   = aws_iam_role.master.name
+  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
+}
+
 data "aws_iam_policy_document" "manager_assume_policy" {
   statement {
     principals {
       type        = "AWS"
-      identifiers = ["arn:aws:iam::${var.aws_account_id}:root"]
+      identifiers = var.manager_iam_role_principals
     }
     actions = ["sts:AssumeRole"]
   }
@@ -133,6 +140,11 @@ resource "aws_iam_role_policy" "manager_policy" {
   policy = data.aws_iam_policy_document.manager_policy.json
 }
 
+resource "aws_iam_role_policy_attachment" "manager_readonly_policy" {
+  role   = aws_iam_role.manager.name
+  policy_arn = "arn:aws:iam::aws:policy/ReadOnlyAccess"
+}
+
 # --------------------------------------------------------------------------------------------------
 # Support Role
 # --------------------------------------------------------------------------------------------------
@@ -140,7 +152,7 @@ data "aws_iam_policy_document" "support_assume_policy" {
   statement {
     principals {
       type        = "AWS"
-      identifiers = [var.support_iam_role_principal_arn]
+      identifiers = var.support_iam_role_principals
     }
     actions = ["sts:AssumeRole"]
   }

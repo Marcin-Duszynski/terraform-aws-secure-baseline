@@ -20,7 +20,9 @@ module "iam_baseline" {
   manager_iam_role_policy_name   = var.manager_iam_role_policy_name
   support_iam_role_name          = var.support_iam_role_name
   support_iam_role_policy_name   = var.support_iam_role_policy_name
-  support_iam_role_principal_arn = var.support_iam_role_principal_arn
+  master_iam_role_principals     = var.master_iam_role_principals
+  manager_iam_role_principals    = var.manager_iam_role_principals
+  support_iam_role_principals    = var.support_iam_role_principals
   minimum_password_length        = var.minimum_password_length
   password_reuse_prevention      = var.password_reuse_prevention
   require_lowercase_characters   = var.require_lowercase_characters
