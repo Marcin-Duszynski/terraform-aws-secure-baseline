@@ -37,28 +37,28 @@ data "aws_iam_policy_document" "recorder_publish_policy" {
     resources = [local.audit_log_bucket_arn]
   }
 
-  statement {
-    actions = ["sns:Publish"]
+  # statement {
+  #   actions = ["sns:Publish"]
 
-    resources = [
-      module.config_baseline_ap-northeast-1.config_sns_topic.arn,
-      module.config_baseline_ap-northeast-2.config_sns_topic.arn,
-      module.config_baseline_ap-south-1.config_sns_topic.arn,
-      module.config_baseline_ap-southeast-1.config_sns_topic.arn,
-      module.config_baseline_ap-southeast-2.config_sns_topic.arn,
-      module.config_baseline_ca-central-1.config_sns_topic.arn,
-      module.config_baseline_eu-central-1.config_sns_topic.arn,
-      module.config_baseline_eu-north-1.config_sns_topic.arn,
-      module.config_baseline_eu-west-1.config_sns_topic.arn,
-      module.config_baseline_eu-west-2.config_sns_topic.arn,
-      module.config_baseline_eu-west-3.config_sns_topic.arn,
-      module.config_baseline_sa-east-1.config_sns_topic.arn,
-      module.config_baseline_us-east-1.config_sns_topic.arn,
-      module.config_baseline_us-east-2.config_sns_topic.arn,
-      module.config_baseline_us-west-1.config_sns_topic.arn,
-      module.config_baseline_us-west-2.config_sns_topic.arn,
-    ]
-  }
+  #   resources = [
+  #     module.config_baseline_ap-northeast-1.config_sns_topic.arn,
+  #     module.config_baseline_ap-northeast-2.config_sns_topic.arn,
+  #     module.config_baseline_ap-south-1.config_sns_topic.arn,
+  #     module.config_baseline_ap-southeast-1.config_sns_topic.arn,
+  #     module.config_baseline_ap-southeast-2.config_sns_topic.arn,
+  #     module.config_baseline_ca-central-1.config_sns_topic.arn,
+  #     module.config_baseline_eu-central-1.config_sns_topic.arn,
+  #     module.config_baseline_eu-north-1.config_sns_topic.arn,
+  #     module.config_baseline_eu-west-1.config_sns_topic.arn,
+  #     module.config_baseline_eu-west-2.config_sns_topic.arn,
+  #     module.config_baseline_eu-west-3.config_sns_topic.arn,
+  #     module.config_baseline_sa-east-1.config_sns_topic.arn,
+  #     module.config_baseline_us-east-1.config_sns_topic.arn,
+  #     module.config_baseline_us-east-2.config_sns_topic.arn,
+  #     module.config_baseline_us-west-1.config_sns_topic.arn,
+  #     module.config_baseline_us-west-2.config_sns_topic.arn,
+  #   ]
+  # }
 }
 
 resource "aws_iam_role_policy" "recorder_publish_policy" {

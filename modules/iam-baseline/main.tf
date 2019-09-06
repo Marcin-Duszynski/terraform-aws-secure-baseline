@@ -63,7 +63,7 @@ data "aws_iam_policy_document" "master_policy" {
       "iam:DetachGroupPolicy", "iam:DetachRolePolicy", "iam:DetachUserPolicy",
       "iam:PutGroupPolicy", "iam:PutUserPolicy",
       "iam:RemoveUserFromGroup",
-      "iam:UpdateGroup", "iam:UpdateAssumeRolePolicy", "iam:UpdateUser"
+      "iam:UpdateGroup", "iam:UpdateUser"
     ]
     resources = ["*"]
   }
