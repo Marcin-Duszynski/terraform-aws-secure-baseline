@@ -60,7 +60,7 @@ data "aws_iam_policy_document" "master_policy" {
       "iam:CreateUser", "iam:DeleteUser",
       "iam:AttachGroupPolicy",
       "iam:DeleteGroupPolicy", "iam:DeleteUserPolicy",
-      "iam:DetachGroupPolicy", "iam:DetachRolePolicy", "iam:DetachUserPolicy",
+      "iam:DetachGroupPolicy", "iam:DetachUserPolicy",
       "iam:PutGroupPolicy", "iam:PutUserPolicy",
       "iam:RemoveUserFromGroup",
       "iam:UpdateGroup", "iam:UpdateUser"
